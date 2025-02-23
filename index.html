@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskGenie</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* General Styles */
+        body {
+            <script scr = "server.js"></script>
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000000, #2e2e2e); /* Black to grey gradient */
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Title with Gradient */
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #00c6ff, #7f5cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* White Search Bar */
+        input {
+            width: 85%;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+            background: white;
+            color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        input::placeholder {
+            color: #777;
+        }
+
+        input:focus {
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+        }
+
+        /* Updated Button with Blue Gradient */
+        button {
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 198, 255, 0.8);
+        }
+
+        button:disabled {
+            background: gray;
+            cursor: not-allowed;
+        }
+
+        /* Response Container */
+        .response-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        /* Response Box */
+        .response-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #00c6ff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 198, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .response-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 198, 255, 0.5);
+        }
+
+        /* AI Name Highlight */
+        .response-box strong {
+            color: #00c6ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>AskGenie</h1>
+        <input type="text" id="query" placeholder="Ask me anything...">
+        <button onclick="fetchResponses()" id="fetchButton">Get Answers</button>
+
+        <div class="response-container" id="responses"></div>
+    </div>
+
+    <script>
+        function fetchResponses() {
+            let query = document.getElementById("query").value;
+            let responsesDiv = document.getElementById("responses");
+            let button = document.getElementById("fetchButton");
+
+            if (!query) {
+                alert("Please enter a query!");
+                return;
+            }
+
+            button.disabled = true;
+            responsesDiv.innerHTML = "<p>🔮 Summoning AI wisdom...</p>";
+
+            // Simulating AI API responses
+            setTimeout(() => {
+                let responses = {
+                    "💬 ChatGPT": "Here's ChatGPT's response to: " + query,
+                    "🔮 Gemini": "A mystical answer from Gemini: " + query,
+                    "🛸 DeepSeek": "DeepSeek says: " + query
+                };
+
+                responsesDiv.innerHTML = "";
+                for (let ai in responses) {
+                    let responseBox = document.createElement("div");
+                    responseBox.className = "response-box";
+                    responseBox.innerHTML = <strong>${ai}</strong>: <p>${responses[ai]}</p>;
+                    responsesDiv.appendChild(responseBox);
+                }
+
+                button.disabled = false;
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
